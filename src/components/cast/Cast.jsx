@@ -6,6 +6,7 @@ const Cast = () => {
   const { movieId } = useParams();
 
   const [responseData, setResponseData] = useState();
+  console.log('responseData:', responseData);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -39,10 +40,12 @@ const Cast = () => {
           responseData.map(({ id, name, character, profile_path }) => {
             return (
               <li key={id}>
-                <img
-                  src={`https://image.tmdb.org/t/p/w200/${profile_path}`}
-                  alt={name}
-                />
+                {profile_path && (
+                  <img
+                    src={`https://image.tmdb.org/t/p/w200/${profile_path}`}
+                    alt={name}
+                  />
+                )}
                 <p>{name}</p>
                 <p>{`Character: ${character}`}</p>
               </li>

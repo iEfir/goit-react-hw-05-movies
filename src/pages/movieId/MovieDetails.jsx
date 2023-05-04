@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link, Outlet, useNavigate, useParams } from 'react-router-dom';
+import { Link, Outlet, useParams } from 'react-router-dom';
 
 const MoviesDetails = () => {
   const [responseData, setResponseData] = useState({});
@@ -8,7 +8,7 @@ const MoviesDetails = () => {
   const { movieId } = useParams();
   // console.log('movieId:', movieId);
   const [castVisible, setCastVisible] = useState(false);
-  // console.log('castVisible:', castVisible);
+  console.log('castVisible:', castVisible);
   // const navigate = useNavigate();
 
   useEffect(() => {
@@ -59,10 +59,12 @@ const MoviesDetails = () => {
       <div>
         <div>
           <Link to={'/'}>Go back</Link>
-          <img
-            src={`https://image.tmdb.org/t/p/w300/${poster_path}`}
-            alt={title}
-          />
+          {poster_path && (
+            <img
+              src={`https://image.tmdb.org/t/p/w300/${poster_path}`}
+              alt={title}
+            />
+          )}
         </div>
         <div>
           <h1>{title}</h1>
@@ -70,9 +72,10 @@ const MoviesDetails = () => {
           <h2>Overview</h2>
           <p>{overview}</p>
           <h2>Genres</h2>
-          {genres.map(({ name, id }) => {
-            return <p key={id}>{name}</p>;
-          })}
+          {genres &&
+            genres.map(({ name, id }) => {
+              return <p key={id}>{name}</p>;
+            })}
         </div>
         <div>
           <h3>Additioanal information</h3>
