@@ -31,12 +31,12 @@ const Reviews = () => {
     return () => {
       controller.abort();
     };
-  }, []);
+  }, [movieId]);
 
   return (
     <div>
       <ul>
-        {responseData &&
+        {responseData && responseData.length > 0 ? (
           responseData.map(({ id, author, content }) => {
             return (
               <li key={id}>
@@ -44,7 +44,10 @@ const Reviews = () => {
                 <p>{content}</p>
               </li>
             );
-          })}
+          })
+        ) : (
+          <p>We don't have reviews for tihs movie.</p>
+        )}
       </ul>
     </div>
   );
