@@ -2,9 +2,7 @@ const Movies = () => {
   return (
     <main>
       <div>
-        <ul>
-          <li>film discription</li>
-        </ul>
+        <h2>Search movie</h2>
       </div>
     </main>
   );

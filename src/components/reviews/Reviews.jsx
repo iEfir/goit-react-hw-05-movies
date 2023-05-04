@@ -1,10 +1,12 @@
-// import { fetchTrending } from 'fetchService/fetchTrending';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
-const Home = () => {
-  const [responseData, setResponseData] = useState([]);
+const Reviews = () => {
+  const { movieId } = useParams();
+
+  const [responseData, setResponseData] = useState();
+  console.log('responseData:', responseData);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -16,7 +18,7 @@ const Home = () => {
 
     async function fetchTrending() {
       try {
-        const response = await axios.get('trending/movie/day', {
+        const response = await axios.get(`/movie/${Number(movieId)}/reviews`, {
           signal: controller.signal,
         });
 
@@ -32,20 +34,20 @@ const Home = () => {
   }, []);
 
   return (
-    <main>
-      <div>
-        <ul>
-          {responseData.map(({ id, title }) => {
+    <div>
+      <ul>
+        {responseData &&
+          responseData.map(({ id, author, content }) => {
             return (
               <li key={id}>
-                <Link to={`/movies/${id}`}>{title}</Link>
+                <b>{author}</b>
+                <p>{content}</p>
               </li>
             );
           })}
-        </ul>
-      </div>
-    </main>
+      </ul>
+    </div>
   );
 };
 
-export default Home;
+export default Reviews;
