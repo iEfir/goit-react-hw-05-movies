@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { CastContainer, CastList, CastListItem } from './Cast.styled';
+import { CastList, CastListItem } from './Cast.styled';
 
 const Cast = () => {
   const { movieId } = useParams();
