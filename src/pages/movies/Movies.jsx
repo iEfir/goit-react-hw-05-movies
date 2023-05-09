@@ -6,17 +6,17 @@ const Movies = () => {
   const location = useLocation();
   const [responseData, setResponseData] = useState();
   const [searchParams, setSearchParams] = useSearchParams();
-  const searchByFilmName = searchParams.get('filmname');
+  const searchByFilmsName = searchParams.get('filmsname');
 
   useEffect(() => {
-    if (!searchByFilmName) return;
+    if (!searchByFilmsName) return;
 
     const controller = new AbortController();
 
     axios.defaults.baseURL = 'https://api.themoviedb.org/3';
     axios.defaults.params = {
       api_key: '75d8b1353cef49a6219d2708694c471e',
-      query: `${searchByFilmName}`,
+      query: `${searchByFilmsName}`,
     };
 
     async function fetchTrending() {
@@ -34,12 +34,12 @@ const Movies = () => {
     return () => {
       controller.abort();
     };
-  }, [searchByFilmName]);
+  }, [searchByFilmsName]);
 
   const handleSubmit = e => {
     e.preventDefault();
     const form = e.currentTarget;
-    setSearchParams({ filmname: form.elements.filmname.value });
+    setSearchParams({ filmsname: form.elements.filmsname.value });
     form.reset();
   };
 

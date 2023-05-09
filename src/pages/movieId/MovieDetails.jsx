@@ -16,6 +16,7 @@ const MoviesDetails = () => {
   const [responseData, setResponseData] = useState({});
   const { movieId } = useParams();
   const [castVisible, setCastVisible] = useState(false);
+  console.log('castVisible:', castVisible);
 
   useEffect(() => {
     const controller = new AbortController();
