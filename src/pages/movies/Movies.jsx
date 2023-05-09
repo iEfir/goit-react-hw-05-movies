@@ -46,7 +46,7 @@ const Movies = () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <input type="text" name="filmname" />
+        <input type="text" name="filmsname" />
         <button type="submit">Search</button>
       </form>
       {responseData && (
