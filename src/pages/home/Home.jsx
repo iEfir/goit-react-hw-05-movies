@@ -1,10 +1,10 @@
-// import { fetchTrending } from 'fetchService/fetchTrending';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Home = () => {
-  const [responseData, setResponseData] = useState([]);
+  const location = useLocation();
+  const [responseData, setResponseData] = useState();
 
   useEffect(() => {
     const controller = new AbortController();
@@ -32,19 +32,21 @@ const Home = () => {
   }, []);
 
   return (
-    <main>
-      <div>
+    <div>
+      {responseData && (
         <ul>
           {responseData.map(({ id, title }) => {
             return (
               <li key={id}>
-                <Link to={`/movies/${id}`}>{title}</Link>
+                <Link to={`/movies/${id}`} state={{ from: location }}>
+                  {title}
+                </Link>
               </li>
             );
           })}
         </ul>
-      </div>
-    </main>
+      )}
+    </div>
   );
 };
 
